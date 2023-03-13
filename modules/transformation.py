@@ -55,7 +55,7 @@ class LocalizationNetwork(nn.Module):
             nn.Conv2d(128, 256, 3, 1, 1, bias=False), nn.BatchNorm2d(256), nn.ReLU(True),
             nn.MaxPool2d(2, 2),  # batch_size x 256 x I_height/8 x I_width/8
             nn.Conv2d(256, 512, 3, 1, 1, bias=False), nn.BatchNorm2d(512), nn.ReLU(True),
-            nn.AdaptiveAvgPool2d(1)  # batch_size x 512
+            nn.AvgPool2d((4, 12), (4, 12))  # batch_size x 512
         )
 
         self.localization_fc1 = nn.Sequential(nn.Linear(512, 256), nn.ReLU(True))
