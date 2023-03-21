@@ -28,6 +28,9 @@ class Attention(nn.Module):
         output: probability distribution at each step [batch_size x num_steps x num_classes]
         """
         batch_size = batch_H.size(0)
+        if text is None:
+            batch_size = 1
+            is_train = False
         num_steps = batch_max_length + 1  # +1 for [s] at end of sentence.
 
         output_hiddens = torch.FloatTensor(batch_size, num_steps, self.hidden_size).fill_(0).to(device)
